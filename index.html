@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SS Textile ERP</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<header class="top-header">
+
+<div>
+<h1>SS Textile ERP</h1>
+<p>GST Billing & Invoice Management System</p>
+</div>
+
+<div class="top-actions">
+
+<button id="backupBtn">
+Backup
+</button>
+
+<button id="restoreBtn">
+Restore
+</button>
+
+<button id="newInvoiceBtn">
+New Invoice
+</button>
+
+</div>
+
+</header>
+
+<div class="app-layout">
+
+<!-- LEFT PANEL -->
+
+<div class="left-panel">
+
+<!-- DASHBOARD -->
+
+<div class="stats-grid">
+
+<div class="stat-card">
+<p>Total Sales</p>
+<h2 id="totalSalesCard">₹0</h2>
+</div>
+
+<div class="stat-card">
+<p>Total Invoices</p>
+<h2 id="totalInvoicesCard">0</h2>
+</div>
+
+<div class="stat-card">
+<p>Customers</p>
+<h2 id="totalCustomersCard">0</h2>
+</div>
+
+<div class="stat-card">
+<p>GST Collected</p>
+<h2 id="totalGSTCard">₹0</h2>
+</div>
+
+</div>
+
+<!-- COMPANY PROFILE -->
+
+<div class="card">
+
+<h3>Company Profile</h3>
+
+<input
+id="companyName"
+placeholder="Company Name">
+
+<input
+id="companyGST"
+placeholder="GST Number">
+
+<textarea
+id="companyAddress"
+placeholder="Company Address"></textarea>
+
+<input
+id="companyEmail"
+placeholder="Email">
+
+<input
+id="companyPhone"
+placeholder="Phone">
+
+<input
+id="bankName"
+placeholder="Bank Name">
+
+<input
+id="accountNumber"
+placeholder="Account Number">
+
+<input
+id="ifscCode"
+placeholder="IFSC Code">
+
+<button
+id="saveCompanyBtn"
+class="primary-btn">
+
+Save Company
+
+</button>
+
+</div>
+
+<!-- CUSTOMER -->
+
+<div class="card">
+
+<h3>Customer Details</h3>
+
+<input
+id="customerName"
+placeholder="Customer Name">
+
+<input
+id="customerMobile"
+placeholder="Mobile Number">
+
+<input
+id="customerGST"
+placeholder="GST Number">
+
+<textarea
+id="customerAddress"
+placeholder="Address"></textarea>
+
+<button
+id="saveCustomerBtn"
+class="primary-btn">
+
+Save Customer
+
+</button>
+
+</div>
+
+<!-- INVOICE -->
+
+<div class="card">
+
+<h3>Invoice Details</h3>
+
+<input
+id="invoiceNo"
+placeholder="Invoice No">
+
+<input
+id="invoiceDate"
+type="date">
+
+<input
+id="dueDate"
+type="date">
+
+<input
+id="challanNo"
+placeholder="Delivery Challan No">
+
+<input
+id="ewayBillNo"
+placeholder="E-Way Bill No">
+
+<input
+id="paymentTerms"
+value="15 DAYS CREDIT">
+
+<input
+id="deliveryType"
+value="DOOR DELIVERY">
+
+</div>
+
+<!-- PRODUCT -->
+
+<div class="card">
+
+<h3>Add Product</h3>
+
+<input
+id="itemDescription"
+placeholder="Description">
+
+<input
+id="itemHSN"
+placeholder="HSN">
+
+<input
+id="itemQty"
+type="number"
+placeholder="Qty">
+
+<input
+id="itemRate"
+type="number"
+placeholder="Rate">
+
+<select id="itemGST">
+
+<option value="5">
+GST 5%
+</option>
+
+<option value="12">
+GST 12%
+</option>
+
+<option value="18">
+GST 18%
+</option>
+
+</select>
+
+<button
+id="addItemBtn"
+class="primary-btn">
+
+Add Item
+
+</button>
+
+</div>
+
+<!-- ITEMS -->
+
+<div class="card">
+
+<h3>Invoice Items</h3>
+
+<table id="itemsTable">
+
+<thead>
+
+<tr>
+
+<th>#</th>
+<th>Description</th>
+<th>HSN</th>
+<th>Qty</th>
+<th>Rate</th>
+<th>Amount</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- SUMMARY -->
+
+<div class="summary-box">
+
+<h3>Invoice Summary</h3>
+
+<div class="summary-row">
+<span>Subtotal</span>
+<span id="subtotal">₹0</span>
+</div>
+
+<div class="summary-row">
+<span>CGST</span>
+<span id="cgst">₹0</span>
+</div>
+
+<div class="summary-row">
+<span>SGST</span>
+<span id="sgst">₹0</span>
+</div>
+
+<div class="grand-total">
+
+<span>Total</span>
+
+<span id="grandTotal">
+₹0
+</span>
+
+</div>
+
+</div>
+
+<!-- ACTIONS -->
+
+<div class="action-buttons">
+
+<button
+id="saveInvoiceBtn"
+class="primary-btn">
+
+Save Invoice
+
+</button>
+
+<button
+id="printInvoiceBtn"
+class="dark-btn">
+
+Print
+
+</button>
+
+<button
+id="pdfInvoiceBtn"
+class="primary-btn">
+
+Download PDF
+
+</button>
+
+<button
+id="whatsappBtn"
+class="success-btn">
+
+WhatsApp
+
+</button>
+
+</div>
+
+<!-- HISTORY -->
+
+<div class="card">
+
+<h3>Invoice History</h3>
+
+<table id="historyTable">
+
+<thead>
+
+<tr>
+
+<th>Invoice</th>
+<th>Date</th>
+<th>Customer</th>
+<th>Total</th>
+<th>Actions</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- RIGHT PANEL -->
+
+<div class="right-panel">
+
+<div id="invoicePrintArea">
+
+<div class="empty-preview">
+
+<h2>
+Invoice Preview
+</h2>
+
+<p>
+Invoice will appear here
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/company.js"></script>
+<script src="js/customer.js"></script>
+<script src="js/invoice.js"></script>
+<script src="js/pdf.js"></script>
+<script src="js/reports.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
