@@ -24,11 +24,10 @@ body{
 font-family:Inter,Segoe UI,sans-serif;
 background:var(--bg);
 color:#111827;
+overflow-x:hidden;
 }
 
-/* ===================================
-HEADER
-=================================== */
+/* HEADER */
 
 .top-header{
 background:white;
@@ -53,11 +52,10 @@ margin-top:4px;
 .top-actions{
 display:flex;
 gap:10px;
+flex-wrap:wrap;
 }
 
-/* ===================================
-LAYOUT
-=================================== */
+/* LAYOUT */
 
 .container{
 width:100%;
@@ -82,9 +80,7 @@ position:sticky;
 top:20px;
 }
 
-/* ===================================
-CARDS
-=================================== */
+/* CARDS */
 
 .card{
 background:white;
@@ -99,9 +95,7 @@ margin-bottom:15px;
 font-size:18px;
 }
 
-/* ===================================
-INPUTS
-=================================== */
+/* INPUTS */
 
 input,
 textarea,
@@ -126,9 +120,7 @@ outline:none;
 border-color:var(--primary);
 }
 
-/* ===================================
-BUTTONS
-=================================== */
+/* BUTTONS */
 
 button{
 border:none;
@@ -162,9 +154,7 @@ background:var(--dark);
 color:white;
 }
 
-/* ===================================
-DASHBOARD
-=================================== */
+/* DASHBOARD */
 
 .stats-grid{
 display:grid;
@@ -190,9 +180,7 @@ margin-bottom:8px;
 font-size:24px;
 }
 
-/* ===================================
-TABLES
-=================================== */
+/* TABLES */
 
 table{
 width:100%;
@@ -216,19 +204,13 @@ tr:nth-child(even){
 background:#fafafa;
 }
 
-/* ===================================
-SUMMARY
-=================================== */
+/* SUMMARY */
 
 .summary-box{
 background:var(--dark);
 color:white;
 padding:20px;
 border-radius:14px;
-}
-
-.summary-box h3{
-margin-bottom:15px;
 }
 
 .summary-row{
@@ -247,9 +229,7 @@ font-size:24px;
 font-weight:700;
 }
 
-/* ===================================
-ACTION BUTTONS
-=================================== */
+/* ACTIONS */
 
 .action-buttons{
 display:grid;
@@ -257,19 +237,18 @@ grid-template-columns:1fr 1fr;
 gap:10px;
 }
 
-/* ===================================
-INVOICE PREVIEW
-=================================== */
+/* PREVIEW */
 
 #invoicePrintArea{
 background:#e5e7eb;
 padding:20px;
 border-radius:16px;
+overflow:auto;
 }
 
 .empty-preview{
 background:white;
-height:800px;
+height:700px;
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -277,24 +256,20 @@ align-items:center;
 border-radius:14px;
 }
 
-.empty-preview h2{
-margin-bottom:10px;
-}
-
 /* ===================================
-A4 INVOICE
+INVOICE
 =================================== */
 
 .invoice-page{
-width:210mm;
-min-height:297mm;
+width:190mm;
+max-width:190mm;
 background:white;
-padding:18mm;
+padding:10mm;
 margin:auto;
+box-sizing:border-box;
+overflow:hidden;
 box-shadow:0 10px 30px rgba(0,0,0,.15);
 }
-
-/* HEADER */
 
 .invoice-header{
 display:flex;
@@ -303,12 +278,14 @@ align-items:flex-start;
 padding-bottom:15px;
 border-bottom:3px solid var(--primary);
 margin-bottom:20px;
+gap:20px;
 }
 
 .invoice-company{
-font-size:30px;
+font-size:38px;
 font-weight:700;
 color:var(--primary);
+line-height:1.1;
 margin-bottom:5px;
 }
 
@@ -318,9 +295,15 @@ color:white;
 padding:10px 20px;
 border-radius:10px;
 font-weight:700;
+font-size:14px;
+letter-spacing:1px;
 }
 
-/* BILL SECTION */
+.invoice-logo{
+max-height:80px;
+max-width:180px;
+margin-bottom:10px;
+}
 
 .invoice-section{
 border:1px solid var(--border);
@@ -343,8 +326,6 @@ padding:15px;
 border-right:1px solid var(--border);
 }
 
-/* PRODUCT TABLE */
-
 .invoice-table{
 width:100%;
 border-collapse:collapse;
@@ -358,9 +339,8 @@ color:white;
 
 .invoice-table td{
 border:1px solid var(--border);
+word-break:break-word;
 }
-
-/* TOTAL */
 
 .invoice-summary{
 margin-top:20px;
@@ -387,8 +367,6 @@ padding-top:12px;
 border-top:1px solid rgba(255,255,255,.2);
 }
 
-/* WORDS */
-
 .amount-words{
 margin-top:20px;
 padding:15px;
@@ -396,8 +374,6 @@ border:1px solid var(--border);
 border-radius:10px;
 background:#fafafa;
 }
-
-/* FOOTER */
 
 .invoice-footer{
 margin-top:20px;
@@ -407,33 +383,48 @@ gap:20px;
 }
 
 .invoice-bank,
-.invoice-sign{
+.invoice-sign,
+.invoice-declaration{
 border:1px solid var(--border);
 padding:15px;
 border-radius:10px;
+background:white;
 }
 
 .sign-space{
 height:70px;
 }
 
-.invoice-declaration{
-margin-top:20px;
-padding:15px;
-border:1px solid var(--border);
-border-radius:10px;
+.qr-image{
+width:120px;
+height:120px;
+object-fit:contain;
+margin-top:10px;
+}
+
+.signature-image{
+max-width:180px;
+max-height:80px;
+object-fit:contain;
 }
 
 /* ===================================
-PRINT
+PRINT FIX
 =================================== */
 
 @page{
-size:A4;
-margin:6mm;
+size:A4 portrait;
+margin:0;
 }
 
 @media print{
+
+html,
+body{
+width:210mm;
+height:297mm;
+background:white;
+}
 
 body *{
 visibility:hidden;
@@ -448,14 +439,21 @@ visibility:visible;
 position:absolute;
 left:0;
 top:0;
-width:100%;
+width:210mm;
 padding:0;
+margin:0;
 background:white;
 }
 
 .invoice-page{
-box-shadow:none;
+width:210mm;
+max-width:210mm;
+padding:8mm;
 margin:0;
+box-shadow:none;
+overflow:hidden;
+page-break-inside:avoid;
+break-inside:avoid;
 }
 }
 
@@ -471,11 +469,13 @@ grid-template-columns:1fr;
 
 .right-panel{
 position:relative;
+top:0;
 }
 
 .invoice-page{
 width:100%;
-padding:20px;
+max-width:100%;
+padding:12px;
 }
 
 .invoice-row,
@@ -490,5 +490,13 @@ border-bottom:1px solid var(--border);
 
 .invoice-summary{
 width:100%;
+}
+
+.invoice-header{
+flex-direction:column;
+}
+
+.invoice-company{
+font-size:28px;
 }
 }
